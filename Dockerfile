@@ -7,8 +7,16 @@ RUN apt-get update \
   && curl -sL https://deb.nodesource.com/setup_12.x | bash - \
   && apt-get install -y nodejs
 
+#RUN npm install -g json-server
+
+#ENTRYPOINT ["json-server", "--port", "8085", "--host", "0.0.0.0"]
+
+#CMD ["/tmp/config.json"]
+
 RUN npm install -g json-server
 
-ENTRYPOINT ["json-server", "--port", "8085", "--host", "0.0.0.0"]
+RUN echo '{"cars":[{"id":1,"brand":"opel","model":"corsa"},{"id":2,"brand":"ford","model":"fiesta"}]}' > /tmp/test.json
 
-CMD ["/tmp/config.json"]
+ENTRYPOINT ["json-server", "--port", "8080", "--host", "0.0.0.0"]
+
+CMD ["/tmp/test.json"]
