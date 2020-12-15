@@ -35,4 +35,4 @@ jobs:
             name: aci-sampleapp
             location: 'west us'
         - name: 'Run container'
-          run: docker run --rm --name aci-sampleapp -H ${{ secrets.RESOURCE_GROUP }}${{ github.run_number }} ${{ secrets.REGISTRY_LOGIN_SERVER }}/sampleapp:${{ github.sha }}
+          run: docker run --rm --name aci-sampleapp -h ${{ secrets.RESOURCE_GROUP }}${{ github.run_number }} ${{ secrets.REGISTRY_LOGIN_SERVER }}/sampleapp:${{ github.sha }}
