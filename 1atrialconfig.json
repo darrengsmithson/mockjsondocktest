@@ -1,0 +1,131 @@
+{
+  "trial":{
+    "trialName":"Based on ORION-5",
+    "trialId":"ExampleO4",
+    "module":[
+      {
+        "admin":[
+          {
+            "bootstrapUser":"alexb@arts",
+            "bootstrapRole":0,
+            "roles":[
+              {
+                "roleId":0,
+                "roleName":"Superuser"
+              },
+              {
+                "roleId":2,
+                "roleName":"CCO superuser"
+              },
+              {
+                "roleId":10003,
+                "roleName":"CCO admin"
+              },
+              {
+                "roleId":10006,
+                "roleName":"Local Lead Investigator"
+              }
+            ],
+            "children":[
+              {
+                "nodeTypeName":"RegionA",
+                "attributes":[{
+                  "regionId":{
+                    "label":"Region ID",
+                    "type":"number",
+                    "defaultSS":"sequence(start=1, step=1)",
+                    "readOnly":true,
+                    "useForNodeId":true
+                  },
+                  "contactPhone":{
+                    "label":"Emergency phone contact",
+                    "type":"string",
+                    "validation":"isEmpty(value) or isPhoneNumber(value)"
+                  }
+                }],
+                "children":[
+                  {
+                    "nodeTypeName":"Country",
+                    "attributes":[{
+                      "countryId":{
+                        "label":"Country ID",
+                        "type":"number",
+                        "defaultSS":"sequence(start=11, step=1)",
+                        "readOnly":true,
+                        "useForNodeId":true
+                      },
+                      "contactPhone":{
+                        "label":"Emergency phone contact",
+                        "type":"string",
+                        "validation":"isEmpty(value) or isPhoneNumber(value)"
+                      },
+                      "countryCode":{
+                        "label":"ISO country code",
+                        "type":"string",
+                        "validation":"isISO3code(value)"
+                      },
+                      "approvals":{
+                        "label":"Regulatory approvals",
+                        "type":"array(Approval)",
+                        "defaultA":"[]"
+                      }
+                    }],
+                    "children":[
+                      {
+                        "nodeTypeName":"LCC",
+                        "attributes":[{
+                          "centreId":{
+                            "label":"LCC ID",
+                            "type":"number",
+                            "defaultSS":"100 * countryId + sequence(start=1, step=1)",
+                            "readOnly":true,
+                            "useForNodeId":true
+                          },
+                          "contactPhone":{
+                            "label":"Emergency phone contact",
+                            "type":"string",
+                            "validation":"isEmpty(value) or isPhoneNumber(value)"
+                          },
+                          "approvals":{
+                            "label":"Regulatory approvals",
+                            "type":"array(Approval)",
+                            "defaultA":"[]"
+                          },
+                          "activationStatus":{
+                            "label":"Centre activation status",
+                            "type":"ActivationState",
+                            "defaultA":"INACTIVE"
+                          },
+                          "contractDate":{
+                            "label":"Date contract signed",
+                            "type":"date"
+                          },
+                          "randTarget":{
+                            "label":"Randomization target",
+                            "type":"number",
+                            "validation":"value > 0",
+                            "defaultR":"50"
+                          },
+                          "timezone":{
+                            "label":"LCC timezone",
+                            "type":"timezoneSpec",
+                            "defaultT":"Europe/London"
+                          },
+                          "contactPerson":{
+                            "label":"Site contact",
+                            "type":"ref(Practitioner)",
+                            "validation":"isEmpty(value) or value.nodes.contains(node)"
+                          }
+                        }]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
