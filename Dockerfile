@@ -9,7 +9,7 @@ RUN apt-get update \
 
 #RUN npm install -g json-server
 
-#ENTRYPOINT ["json-server", "--port", "8085", "--host", "0.0.0.0"]
+ENTRYPOINT ["json-server", "--port", "80"]
 
 #CMD ["/tmp/config.json"]
 
@@ -17,6 +17,6 @@ RUN npm install -g json-server
 
 RUN echo '{"cars":[{"id":1,"brand":"opel","model":"corsa"},{"id":2,"brand":"ford","model":"fiesta"}]}' > /tmp/test.json
 
-ENTRYPOINT ["json-server"]
+#ENTRYPOINT ["json-server"]
 
 CMD ["/tmp/test.json"]
